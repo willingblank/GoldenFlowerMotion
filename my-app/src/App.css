@@ -1,0 +1,176 @@
+.App {
+  text-align: center;
+}
+
+#totalFrame
+{
+  position: absolute;
+  top: -250px;
+  left: -150px;
+
+  opacity: 1;
+  scale: 0.25;
+  width: 500px;
+  height: 800px;
+  background-color: rgb(214, 226, 226);
+}
+
+#readyFrame
+{
+  top: 200px;
+  left: 100;
+  opacity: 1;
+  
+  background-color: rgb(91, 138, 140);
+  width: 500px;
+  height: 310px;
+  position: absolute;
+  border-radius: 5%;
+
+  z-index: 1;
+}
+
+#readyPlayerList
+{
+  float: left;
+  background-color: rgb(151, 151, 173);
+  width: 130px;
+  height: 310px;
+  border-radius: 5%;
+}
+
+#playerAttributes
+{
+  float: left;
+  /* background-color: rgb(121, 161, 121); */
+  width: 370px;
+  height: 310px;
+  border-radius: 5%;
+}
+
+#inputName
+{
+  background-color: aqua;
+  scale: 1.5;
+  width: 100px;
+  height: 10px;
+  top: 100px;
+  margin: auto;
+  position: relative;
+}
+
+#colorSelecter
+{
+  scale: 1.25;
+  height: 95px;
+  width: 245px;
+  background-color: aqua;
+  position: relative;
+  top: 175px;
+  margin: auto;
+}
+
+#gameFrame
+{
+  opacity: 0.25;
+}
+
+#up
+{
+  width: 500px;
+  height: 400px;
+  background-color: bisque;
+  text-align: center;
+  font-size: 200px;
+}
+
+#down
+{
+  width: 500px;
+  height: 400px;
+  background-color: blueviolet;
+}
+
+#history_bar
+{
+  float: left;
+  width: 100px;
+  height: 400px;
+  background-color: aqua;
+}
+
+#number_bar
+{
+  float: left;
+  width: 300px;
+  height: 400px;
+  background-color: brown;
+}
+
+#action_bar
+{
+  float: left;
+  width: 100px;
+  height: 400px;
+  background-color: rgb(51, 51, 196);
+}
+
+#rank_bar
+{
+  opacity: 0.5;
+  float: left;
+  width: 100px;
+  height: 400px;
+  background-color: blueviolet;
+}
+
+#value_bar
+{
+  opacity: 0.5;
+  float: right;
+  width: 100px;
+  height: 400px;
+  background-color: rgb(145, 40, 93);
+  position: relative;
+}
+
+#Jackpot
+{
+  position: fixed;
+  width: 500px;
+  height: 400px;
+  background-color: chartreuse;
+}
+
+#Numerical_indicator
+{
+  width: 100px;
+  height: 100px;
+  background-color: rgb(44, 255, 185);
+  position: absolute; 
+  bottom: 0;
+  font-size: 50px;
+}
+
+.number_button
+{
+  background-color: rgb(209, 209, 255);
+  width: 100px;
+  height: 100px;
+  border-radius: 45%;
+  float: left;
+  font-size: 50px;
+  text-align: center;
+  user-select: none;
+}
+
+.action_button
+{
+
+  background-color: chocolate;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  font-size: 45px;
+  text-align: center;
+}
