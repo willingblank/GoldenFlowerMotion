@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -8,7 +9,7 @@
   top: -250px;
   left: -150px;
 
-  opacity: 1;
+  opacity: 0.5;
   scale: 0.25;
   width: 500px;
   height: 800px;
@@ -27,16 +28,18 @@
   position: absolute;
   border-radius: 5%;
 
-  z-index: 1;
+  z-index: 10;
 }
 
 #readyPlayerList
 {
+  opacity: 1;
   float: left;
   background-color: rgb(151, 151, 173);
   width: 130px;
   height: 310px;
   border-radius: 5%;
+  
 }
 
 #playerAttributes
@@ -46,6 +49,35 @@
   width: 370px;
   height: 310px;
   border-radius: 5%;
+  backdrop-filter: blur(10px);
+}
+
+#readybutton
+{
+  width: 150px;
+  height: 10px;
+  background-color: aqua;
+  top: 100px;
+  margin: auto;
+}
+
+#addPlayerButton
+{
+  float: left;
+  scale: 1.5;
+  background-color: aqua;
+  width: 50px;
+  height: 10px;
+}
+
+#startGameButton
+{
+  float: right;
+  scale: 1.5;
+  background-color: aqua;
+  width: 50px;
+  height: 10px;
+
 }
 
 #inputName
@@ -72,7 +104,7 @@
 
 #gameFrame
 {
-  opacity: 0.25;
+  opacity: 1;
 }
 
 #up
@@ -81,7 +113,7 @@
   height: 400px;
   background-color: bisque;
   text-align: center;
-  font-size: 200px;
+
 }
 
 #down
@@ -89,6 +121,17 @@
   width: 500px;
   height: 400px;
   background-color: blueviolet;
+}
+
+#playerInfoinReady
+{
+  width: 100px;
+  height: 30px;
+  background-color: aquamarine;
+  text-align: center;
+  border-style:dashed;
+  border-width:1px;
+  border-radius: 20%;
 }
 
 #history_bar
@@ -117,29 +160,34 @@
 
 #rank_bar
 {
-  opacity: 0.5;
+  opacity: 1;
   float: left;
   width: 100px;
   height: 400px;
-  background-color: blueviolet;
+  background-color: rgb(39, 16, 6);
+  font-size: 15px;
+  position: absolute;
+  z-index: 1;
 }
 
 #value_bar
 {
-  opacity: 0.5;
-  float: right;
+  opacity: 1;
+  left: 400px;
   width: 100px;
   height: 400px;
-  background-color: rgb(145, 40, 93);
-  position: relative;
+  background-color: rgb(109, 26, 68);
+  position: absolute;
+  z-index: 1;
 }
 
 #Jackpot
 {
-  position: fixed;
+  position: absolute;
   width: 500px;
   height: 400px;
   background-color: chartreuse;
+  font-size: 250px;
 }
 
 #Numerical_indicator
