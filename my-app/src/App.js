@@ -11,8 +11,8 @@ var color_temp=0;
 
 var playerList=new Array();
 var playerNumber = 0;
+var playerPointer = -1;
 
-var testtemp = 0;
 
 class Player 
     {
@@ -24,17 +24,20 @@ class Player
             this.color = color;
             this.state = state;
             this.checkstate = checkstate;
+            this.scoreColor = "green";
         }
     }
 
   var ReadyFramerOpacity=1;
 
-    
+  var lastNumberIndicator = 1;
 
 function App() {
   const [components, setComponents] = useState([]);
   const [player_components, setplayer_componentss] = useState([]);
   
+  const [indicator_y, setindicator_y] = useState(0);
+  const [indicator_x, setindicator_x] = useState(0);
   const [jackPotVal, setJackPotVal] = useState(0);  //Define jackPot initial Value
   const [numberIndicator, setNumberIndicator] = useState(0);  //Define numberIndicator initial Value
   const [needRender, setNeedRender] = useState(0);  //Define needRender initial Value
@@ -44,16 +47,11 @@ function App() {
   const numberIndicator_count = useMotionValue(0);
   const numberIndicator_rounded = useTransform(numberIndicator_count, Math.round);
 
+  const jackpot_count = useMotionValue(0);
+  const jackpot_rounded = useTransform(jackpot_count, Math.round);
+
   const color_count = useMotionValue("#cccccc");
 
-  const addPlayerComponentss = (playerName,color,keyi) => 
-  {
-    console.log("addPlayerComponents is running ");
-    setplayer_componentss([
-      ...player_components,
-      <PlayerInfo name={playerName} color={color} key={keyi} />
-    ])
-  }
 
   const addComponent = (playerName,color) => 
   {
@@ -108,7 +106,22 @@ function App() {
     //add_div("readyPlayerList");
   }
 
+  function nextPlayer()
+  {
+    // 玩家指针指向下一个玩家
+    if(playerPointer+1<playerNumber)
+    {
+      playerPointer++;
+    }
+    else
+    {
+      playerPointer=0;
+    }
 
+    console.log("playerPointer = "+playerPointer);
+
+    setindicator_y(3+playerPointer*37);
+  }
 
   function startGameAction()
   {
@@ -123,11 +136,32 @@ function App() {
     {
       setTimeout(() => {
         console.log(player_components);
-        setplayer_componentss(prev => [...prev,  <PlayerInfo name={playerList[i].name} color={playerList[i].color} key={i} />]);
+        setplayer_componentss(prev => [...prev,  <PlayerRankInfo player={playerList[i]} score={playerList[i].score} name={playerList[i].name} color={playerList[i].color} key={i} />]);
       }, 100*i);
     }
 
+    nextPlayer();
+    
+  }
 
+  function errorHandle(errorInfo)
+  {
+    alert(errorInfo);
+  }
+
+  function betAction()
+  {
+    console.log(" bet ");
+    if(numberIndicator<lastNumberIndicator)
+    {
+      errorHandle("请输入大于"+lastNumberIndicator+"的值")
+      return;
+    }
+      
+    lastNumberIndicator = numberIndicator;
+    setJackPotVal(jackPotVal+numberIndicator);
+    
+    nextPlayer();
   }
 
   // ------
@@ -138,6 +172,13 @@ function App() {
     //console.log("useEffect is running !!");
     return animation.stop;
   }, [numberIndicator]);
+
+  useEffect(() => {
+    const animation = animate(jackpot_count, jackPotVal, { duration: 0.25 });
+    
+    //console.log("useEffect is running !!");
+    return animation.stop;
+  }, [jackPotVal]);
 
   useEffect(() => {
     const animation = animate(color_count, color_temp, { duration: 0.5 });
@@ -190,7 +231,7 @@ function App() {
           <div    id="rank_bar">
           <div>{player_components}</div>
           </div> {/* rank_bar */}  
-          <motion.div id="Jackpot">{jackPotVal}</motion.div>
+          <motion.div id="Jackpot">{jackpot_rounded}</motion.div>
 
           
 
@@ -203,39 +244,43 @@ function App() {
           <div id="history_bar"></div>
           <div id="number_bar">
             <div>
-              <motion.div className="number_button" onClick={() => numberPress(7)} whileTap={{scale:0.9}} whileHover={{scale:1.1}} >7</motion.div>
-              <motion.div className="number_button" onClick={() => numberPress(8)} whileTap={{scale:0.9}} whileHover={{scale:1.1}} >8</motion.div>
-              <motion.div className="number_button" onClick={() => numberPress(9)} whileTap={{scale:0.9}} whileHover={{scale:1.1}} >9</motion.div>
+              <motion.div className="number_button" onClick={() => numberPress(7)} whileTap={{scale:0.9, backgroundColor:"rgb(0,0,0)"}} whileHover={{scale:1.1}} >7</motion.div>
+              <motion.div className="number_button" onClick={() => numberPress(8)} whileTap={{scale:0.9, backgroundColor:"rgb(0,0,0)"}} whileHover={{scale:1.1}} >8</motion.div>
+              <motion.div className="number_button" onClick={() => numberPress(9)} whileTap={{scale:0.9, backgroundColor:"rgb(0,0,0)"}} whileHover={{scale:1.1}} >9</motion.div>
             </div>
             <div>
-              <motion.div className="number_button" onClick={() => numberPress(4)} whileTap={{scale:0.9}} whileHover={{scale:1.1}} >4</motion.div>
-              <motion.div className="number_button" onClick={() => numberPress(5)} whileTap={{scale:0.9}} whileHover={{scale:1.1}} >5</motion.div>
-              <motion.div className="number_button" onClick={() => numberPress(6)} whileTap={{scale:0.9}} whileHover={{scale:1.1}} >6</motion.div>
+              <motion.div className="number_button" onClick={() => numberPress(4)} whileTap={{scale:0.9, backgroundColor:"rgb(0,0,0)"}} whileHover={{scale:1.1}} >4</motion.div>
+              <motion.div className="number_button" onClick={() => numberPress(5)} whileTap={{scale:0.9, backgroundColor:"rgb(0,0,0)"}} whileHover={{scale:1.1}} >5</motion.div>
+              <motion.div className="number_button" onClick={() => numberPress(6)} whileTap={{scale:0.9, backgroundColor:"rgb(0,0,0)"}} whileHover={{scale:1.1}} >6</motion.div>
             </div>
             <div>
-              <motion.div className="number_button" onClick={() => numberPress(1)} whileTap={{scale:0.9}} whileHover={{scale:1.1}} >1</motion.div>
-              <motion.div className="number_button" onClick={() => numberPress(2)} whileTap={{scale:0.9}} whileHover={{scale:1.1}} >2</motion.div>
-              <motion.div className="number_button" onClick={() => numberPress(3)} whileTap={{scale:0.9}} whileHover={{scale:1.1}} >3</motion.div>
+              <motion.div className="number_button" onClick={() => numberPress(1)} whileTap={{scale:0.9, backgroundColor:"rgb(0,0,0)"}} whileHover={{scale:1.1}} >1</motion.div>
+              <motion.div className="number_button" onClick={() => numberPress(2)} whileTap={{scale:0.9, backgroundColor:"rgb(0,0,0)"}} whileHover={{scale:1.1}} >2</motion.div>
+              <motion.div className="number_button" onClick={() => numberPress(3)} whileTap={{scale:0.9, backgroundColor:"rgb(0,0,0)"}} whileHover={{scale:1.1}} >3</motion.div>
             </div>
             <div>
-              <motion.div className="number_button" onClick={() => numberPress(-2)} whileTap={{scale:0.9}} whileHover={{scale:1.1}} >EC</motion.div>
-              <motion.div className="number_button" onClick={() => numberPress(0)}  whileTap={{scale:0.9}} whileHover={{scale:1.1}} >0</motion.div>
-              <motion.div className="number_button" onClick={() => numberPress(-1)} whileTap={{scale:0.9}} whileHover={{scale:1.1}} >←</motion.div>
+              <motion.div className="number_button" onClick={() => numberPress(-2)} whileTap={{scale:0.9, backgroundColor:"rgb(0,0,0)"}} whileHover={{scale:1.1}} >EC</motion.div>
+              <motion.div className="number_button" onClick={() => numberPress(0)}  whileTap={{scale:0.9, backgroundColor:"rgb(0,0,0)"}} whileHover={{scale:1.1}} >0</motion.div>
+              <motion.div className="number_button" onClick={() => numberPress(-1)} whileTap={{scale:0.9, backgroundColor:"rgb(0,0,0)"}} whileHover={{scale:1.1}} >←</motion.div>
             </div>
             
           </div>
           <div id="action_bar">
-            <motion.div className="action_button">Bet</motion.div>
-            <motion.div className="action_button">Blind</motion.div>
-            <motion.div className="action_button">Fight</motion.div>
-            <motion.div className="action_button">Fold</motion.div>
+            <motion.div className="action_button" onClick={() => betAction()} whileTap={{scale:0.9, backgroundColor:"rgb(0,0,0)"}} >Bet</motion.div>
+            <motion.div className="action_button" whileTap={{scale:0.9, backgroundColor:"rgb(0,0,0)"}}>Blind</motion.div>
+            <motion.div className="action_button" whileTap={{scale:0.9, backgroundColor:"rgb(0,0,0)"}}>Fight</motion.div>
+            <motion.div className="action_button" whileTap={{scale:0.9, backgroundColor:"rgb(0,0,0)"}}>Fold</motion.div>
           </div>
         </div> 
         {/* down */}
 
       </div> {/* gameFrame */}
 
+      <motion.div id="indicatorDiv" animate={{y:indicator_y}}> 
+        <motion.div  id="indicator" animate={{rotate:[90,180,270,360]}} transition={{repeat:Infinity,duration:1.5}}></motion.div>
+      </motion.div>
     </div>
+    
   );
 }
 
@@ -248,5 +293,19 @@ const PlayerInfo = (props) => {
     </motion.div>
   );
 }
+
+const PlayerRankInfo = (props) => {
+  let temperoColor = props.color;
+  let player = props.player;
+
+  return(
+    <motion.div id="playerInfoinRank" transition={{duration:0.5,type:"spring"}} initial={{x:100,opacity:0}} animate={{x:0,opacity:1, backgroundColor:temperoColor}}>
+      <motion.div style={{float:"left",backgroundColor:"red",width:35,height:35}} >{props.score}</motion.div>
+      <div style={{float:"left"}}>-</div>
+      <div style={{textAlign:"left"}}>{props.name}</div>
+    </motion.div>
+  );
+}
+
 
 export default App;

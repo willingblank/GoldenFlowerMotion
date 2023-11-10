@@ -134,6 +134,17 @@
   border-radius: 20%;
 }
 
+#playerInfoinRank
+{
+  width: 150px;
+  height: 35px;
+  background-color: aquamarine;
+  text-align: center;
+  border-style:dashed;
+  border-width:1px;
+  border-radius: 5%;
+}
+
 #history_bar
 {
   float: left;
@@ -200,6 +211,25 @@
   font-size: 50px;
 }
 
+#indicatorDiv
+{
+  position: absolute;
+  top: 5px;
+  left: -10px;
+
+  z-index: 10;
+}
+
+#indicator
+{
+  width: 15px;
+  height: 15px;
+  background-color: blueviolet;
+  
+}
+
+
+
 .number_button
 {
   background-color: rgb(209, 209, 255);
@@ -221,4 +251,5 @@
   border-radius: 50%;
   font-size: 45px;
   text-align: center;
+  user-select: none;
 }
