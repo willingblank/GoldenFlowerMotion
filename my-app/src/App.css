@@ -1,4 +1,3 @@
-
 .App {
   text-align: center;
 }
@@ -13,7 +12,8 @@
   scale: 0.25;
   width: 500px;
   height: 800px;
-  background-color: rgb(214, 226, 226);
+  background-color: rgb(200, 230, 245);
+  border-radius: 5%;
 }
 
 #readyFrame
@@ -22,11 +22,11 @@
   left: 100;
   opacity: 1;
   
-  background-color: rgb(91, 138, 140);
+  background-color: transparent;
   width: 500px;
   height: 310px;
   position: absolute;
-  border-radius: 5%;
+
 
   z-index: 10;
 }
@@ -35,17 +35,17 @@
 {
   opacity: 1;
   float: left;
-  background-color: rgb(151, 151, 173);
+  background-color: rgb(230, 230, 230);
   width: 130px;
   height: 310px;
   border-radius: 5%;
   
 }
 
-#playerAttributes
+#playerAttributesCollecter
 {
   float: left;
-  /* background-color: rgb(121, 161, 121); */
+  background-color: rgb(255, 255, 255);
   width: 370px;
   height: 310px;
   border-radius: 5%;
@@ -54,19 +54,20 @@
 
 #readybutton
 {
-  width: 150px;
+  width: 200px;
   height: 10px;
-  background-color: aqua;
-  top: 100px;
+  background-color: transparent;
+  top: 15px;
   margin: auto;
+  position: relative;
 }
 
 #addPlayerButton
 {
   float: left;
   scale: 1.5;
-  background-color: aqua;
-  width: 50px;
+  background-color: rgb(75, 75, 75);
+  width: 60px;
   height: 10px;
 }
 
@@ -74,19 +75,19 @@
 {
   float: right;
   scale: 1.5;
-  background-color: aqua;
-  width: 50px;
+  background-color: rgb(75, 75, 75);
+  width: 60px;
   height: 10px;
 
 }
 
 #inputName
 {
-  background-color: aqua;
+  background-color: transparent;
   scale: 1.5;
   width: 100px;
   height: 10px;
-  top: 100px;
+  top: 60px;
   margin: auto;
   position: relative;
 }
@@ -96,9 +97,9 @@
   scale: 1.25;
   height: 95px;
   width: 245px;
-  background-color: aqua;
+  background-color: rgb(75, 75, 75);
   position: relative;
-  top: 175px;
+  top: 150px;
   margin: auto;
 }
 
@@ -111,13 +112,13 @@
 {
   width: 500px;
   height: 400px;
-  background-color: bisque;
+  background-color: transparent;
   text-align: center;
-
 }
 
 #down
 {
+  opacity: 0.75;
   width: 500px;
   height: 400px;
   background-color: blueviolet;
@@ -127,22 +128,35 @@
 {
   width: 100px;
   height: 30px;
-  background-color: aquamarine;
+  background-color: transparent;
   text-align: center;
-  border-style:dashed;
+  border-style:double;
   border-width:1px;
-  border-radius: 20%;
+  border-radius: 5%;
 }
 
 #playerInfoinRank
 {
-  width: 150px;
-  height: 35px;
-  background-color: aquamarine;
+  width: 300px;
+  height: 50px;
+  background-color: transparent;
   text-align: center;
-  border-style:dashed;
-  border-width:1px;
-  border-radius: 5%;
+  font-family:"Times New Roman", Times, serif;
+  font-weight: bold;
+  line-height: 50px;
+  font-size: 20px;
+}
+
+#playerScoreinRank
+{
+  float: left;
+  width:50px;
+  height:50px;
+  font-family:"Times New Roman", Times, serif;
+  font-weight: bold;
+  font-size: 25px;
+  border-radius: 25%;
+  line-height: 50px;
 }
 
 #history_bar
@@ -150,7 +164,7 @@
   float: left;
   width: 100px;
   height: 400px;
-  background-color: aqua;
+  background-color: rgb(25, 25, 25);
 }
 
 #number_bar
@@ -158,7 +172,7 @@
   float: left;
   width: 300px;
   height: 400px;
-  background-color: brown;
+  background-color: rgb(100, 100, 100);
 }
 
 #action_bar
@@ -166,7 +180,7 @@
   float: left;
   width: 100px;
   height: 400px;
-  background-color: rgb(51, 51, 196);
+  background-color: rgb(25, 25, 25);
 }
 
 #rank_bar
@@ -175,19 +189,8 @@
   float: left;
   width: 100px;
   height: 400px;
-  background-color: rgb(39, 16, 6);
+  background-color: transparent;
   font-size: 15px;
-  position: absolute;
-  z-index: 1;
-}
-
-#value_bar
-{
-  opacity: 1;
-  left: 400px;
-  width: 100px;
-  height: 400px;
-  background-color: rgb(109, 26, 68);
   position: absolute;
   z-index: 1;
 }
@@ -197,25 +200,45 @@
   position: absolute;
   width: 500px;
   height: 400px;
-  background-color: chartreuse;
-  font-size: 250px;
+  /* background-color: rgb(175, 175, 175); */
+  background-color: transparent;
+  font-size: 245px;
+  font-family:"Times New Roman", Times, serif;
+  line-height: 400px;
+  font-weight: 800;
+  color:rgb(175, 235, 235);
+}
+
+#value_bar
+{
+  opacity: 1;
+  left: 375px;
+  width: 150px;
+  height: 400px;
+  background-color: transparent;
+  position: absolute;
+  z-index: 1;
 }
 
 #Numerical_indicator
 {
-  width: 100px;
-  height: 100px;
-  background-color: rgb(44, 255, 185);
+  width: 125px;
+  height: 77px;
+  background-color: rgb(230, 230, 230);
   position: absolute; 
   bottom: 0;
   font-size: 50px;
+  font-family:"Times New Roman", Times, serif;
+  line-height: 77px;
+  font-weight:bold;
+  border-radius: 10%;
 }
 
 #indicatorDiv
 {
   position: absolute;
   top: 5px;
-  left: -10px;
+  left: -15px;
 
   z-index: 10;
 }
@@ -232,24 +255,29 @@
 
 .number_button
 {
-  background-color: rgb(209, 209, 255);
+  background-color: rgb(235, 235, 235);
   width: 100px;
   height: 100px;
-  border-radius: 45%;
+  border-radius: 40%;
   float: left;
   font-size: 50px;
   text-align: center;
   user-select: none;
+  font-family:"Times New Roman", Times, serif;
+  font-weight:bold;
+  line-height: 95px;
 }
 
 .action_button
 {
 
-  background-color: chocolate;
+  background-color: rgb(200, 200, 200);
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  font-size: 45px;
+  font-size: 40px;
   text-align: center;
   user-select: none;
+  font-family:"Times New Roman", Times, serif;
+  line-height: 95px;
 }
