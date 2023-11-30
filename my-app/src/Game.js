@@ -7,6 +7,7 @@ var myGameAnimate = new MyAnimate();
 export class Game{
     constructor()
     {
+		this.gameState = "preparing"
         this.jackPotVal = 0;
         this.numberIndicator = 0;
         this.lastNumberIndicator = 1;
@@ -109,6 +110,7 @@ export class Game{
 
     startGameAction()
     {
+		this.gameState = "gaming";
 		if(this.playerNumber<2)
 		{
 			this.errorHandle("需要游戏人数大于2人才可开始游戏!");
@@ -155,6 +157,14 @@ export class Game{
 		);
 	}
 
+	winnerScoreSet(who,val)
+	{
+		this.playerList[who].score += val;
+		setTimeout(() => {
+			document.getElementById("ScoreinRankPlayer"+this.playerList[who].id).innerText=this.playerList[this.playerPointer].score;
+		}, 750);
+	}
+
     nextPlayer()
     {
 		// 玩家指针指向下一个玩家
@@ -172,7 +182,7 @@ export class Game{
 		
 		console.log("playerPointer = "+this.playerPointer);
 	
-		document.getElementById("totalFrame").style.backgroundColor = this.playerList[this.playerPointer].color;
+		document.getElementById("victoryCel").style.backgroundColor = this.playerList[this.playerPointer].color;
 		myGameAnimate.Indicator_yAnimation_run(this.playerPointer);
     }
     
@@ -187,24 +197,38 @@ export class Game{
       console.log("numberPress game.get_numberIndicator() = "+this.get_numberIndicator());
     }
 
+
+
 	littleWinner(playerp)
-	{
-		alert("winner this round is("+playerp+"): "+this.playerList[playerp].name);
-		this.set_jackPotVal(0);
-		animate("#totalFrame",);
-		this.playerScoreSet(playerp,this.get_jackPotVal());
-		this.restartGame();
+	{		
+
+		this.gameState = "preparing";
+
+		myGameAnimate.winnerAnimate(playerp);
+
+		this.winnerScoreSet(playerp,this.get_jackPotVal());
+		setTimeout(() => {
+			this.set_jackPotVal(0);
+		}, 750);
+
+		setTimeout(() => {
+			this.restartGame();
+		}, 1500);
 	}
 
 	restartGame()
 	{
-		
-        this.numberIndicator = 0;
+		this.set_numberIndicator(0);
         this.lastNumberIndicator = 1;
 		for(let i=0;i<(this.playerNumber);i++)
 		{
 			this.playerList[i].state = "playing";
 		}	
+
+		setTimeout(() => {
+			this.gameState = "gaming";
+		}, 2000);
+		
 	}
 
 	checkmate()
@@ -263,6 +287,9 @@ export class Game{
 
 	flodAction()
 	{
+		if(this.gameState == "preparing")
+			return;
+
 		this.playerList[this.playerPointer].state = "idle";
 		this.nextPlayer();
 	}
