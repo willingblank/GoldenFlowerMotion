@@ -12,7 +12,7 @@
   scale: 0.25;
   width: 500px;
   height: 800px;
-  background-color: rgb(200, 230, 245);
+  background-color: rgb(165, 190, 200);
   border-radius: 5%;
 }
 
@@ -135,7 +135,7 @@
   border-radius: 5%;
 }
 
-#playerInfoinRank
+.playerInfoinRank
 {
   width: 300px;
   height: 50px;
@@ -147,7 +147,7 @@
   font-size: 20px;
 }
 
-#playerScoreinRank
+.playerScoreinRank
 {
   float: left;
   width:50px;
@@ -280,4 +280,17 @@
   user-select: none;
   font-family:"Times New Roman", Times, serif;
   line-height: 95px;
+}
+
+#victoryCel
+{
+  background-color: brown;
+  position: absolute;
+  opacity: 0.5;
+  top:  0px;
+  left: 0px;
+  width: 500px;
+  height: 800px;
+  border-radius: 5%;
+  z-index: 10;
 }
