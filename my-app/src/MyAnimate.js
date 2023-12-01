@@ -46,9 +46,13 @@ export class MyAnimate
     winnerAnimate(playerp)
     {
         //================================ winnerAnimate start================================
+
+
         setTimeout(() => {
 			animate("#"+"ScoreinRankPlayer"+playerp,
-			{x:[0,225],y:[0,(3.5-playerp)*50],scale:[1,2],opacity:[1,0.75]},{duration:0.3});
+			{x:[0,225],y:[0,(3.5-playerp)*50],scale:[1,2],opacity:[1]},{duration:0.3});
+
+            animate("#rank_bar",{opacity:1});
 		}, 250);
 
         setTimeout(() => {
@@ -68,6 +72,8 @@ export class MyAnimate
         setTimeout(() => {
             animate("#"+"ScoreinRankPlayer"+playerp,
 			{x:0,y:0,scale:1,opacity:1},{duration:0.45, type:"spring"});
+
+            animate("#rank_bar",{opacity:0.8});
         }, 1600);
 
         setTimeout(() => {

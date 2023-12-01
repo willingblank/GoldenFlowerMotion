@@ -26,8 +26,6 @@
   width: 500px;
   height: 310px;
   position: absolute;
-
-
   z-index: 10;
 }
 
@@ -126,12 +124,11 @@
 
 #playerInfoinReady
 {
-  width: 100px;
+  width: 120px;
   height: 30px;
   background-color: transparent;
-  text-align: center;
-  border-style:double;
-  border-width:1px;
+  border-style:dashed;
+  border-width:2px;
   border-radius: 5%;
 }
 
@@ -150,7 +147,7 @@
 .playerScoreinRank
 {
   float: left;
-  width:50px;
+  width:65px;
   height:50px;
   font-family:"Times New Roman", Times, serif;
   font-weight: bold;
@@ -185,7 +182,7 @@
 
 #rank_bar
 {
-  opacity: 1;
+  opacity: 0.7;
   float: left;
   width: 100px;
   height: 400px;
@@ -193,6 +190,7 @@
   font-size: 15px;
   position: absolute;
   z-index: 1;
+  opacity: 0.8;
 }
 
 #Jackpot
@@ -293,4 +291,133 @@
   height: 800px;
   border-radius: 25px;
   z-index: -1;
+}
+
+#fightFrame
+{
+  background-color: transparent;
+  position: absolute;
+  opacity: 0;
+  top:  1000px;
+  left: 0px;
+  width: 500px;
+  height: 400px;
+  border-radius: 25px;
+  z-index: 1;
+}
+
+.playerFightRank
+{
+  width: 250px;
+  height: 50px;
+  background-color: transparent;
+  text-align: center;
+  font-family:"Times New Roman", Times, serif;
+  font-weight: bold;
+  line-height: 50px;
+  font-size: 20px;
+}
+
+
+.fightButton
+{
+  width: 60px;
+  height: 35px;
+  background-color: rgb(57, 69, 69);
+  border-radius: 15%;
+  font-family:"Times New Roman", Times, serif;
+  font-weight:bold;
+  font-size: 20px;
+  float: right;
+  position: relative;
+  top: 10px;
+}
+
+#beFighter
+{
+  float: left;
+  background-color: rgb(150, 150, 150);
+  width: 250px;
+  height: 400px;
+  border-radius: 5%;
+}
+
+#fighter
+{
+  float: right;
+  width: 250px;
+  height: 400px;
+  background-color: blueviolet;
+  border-radius: 5%;
+  font-family:"Times New Roman", Times, serif;
+  font-weight:bold;
+  font-size: 45px;
+  text-align: center;
+}
+
+#fighterScore
+{
+  height: 150px;
+  width: 210px;
+  line-height: 150px;
+  font-size: 100px;
+  border-style:groove;
+  border-width: 20px;
+  border-radius: 5%;
+}
+
+#fighterName
+{
+  height: 55px;
+  line-height: 55px;
+}
+
+#beFighter_2_fighter
+{
+  float: right;
+  width: 250px;
+  height: 400px;
+  background-color: blueviolet;
+  border-radius: 5%;
+  font-family:"Times New Roman", Times, serif;
+  font-weight:bold;
+  font-size: 45px;
+  text-align: center;
+  display: none;
+}
+
+#fighter_2_Score
+{
+  height: 150px;
+  width: 210px;
+  line-height: 150px;
+  font-size: 100px;
+  border-style:groove;
+  border-width: 20px;
+  border-radius: 5%;
+}
+
+#fighter_2_Name
+{
+  height: 55px;
+  line-height: 55px;
+}
+
+.fightPrompt
+{
+  height: 75px;
+  line-height: 75px;
+  font-size: 40px;
+}
+
+.fightVicButton
+{
+  width: 65px;
+  height: 35px;
+  border-radius: 15%;
+  background-color: rgb(255, 240, 230);
+  font-size: 20px;
+  line-height: 10px;
+  font-family:"Times New Roman", Times, serif;
+  font-weight:bold;
 }

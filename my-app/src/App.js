@@ -12,7 +12,8 @@ var game = new Game();
 function App() {
 
   const [components, setComponents] = useState([]);   // 准备阶段添加玩家-动画状态变量 √
-  const [player_components, setplayer_componentss] = useState([]); // 游戏阶段加载玩家-动画状态变量 √
+  const [player_components, setplayer_components] = useState([]); // 游戏阶段加载玩家-动画状态变量 √
+  const [playerFight_components, setplayerFight_components] = useState([]); // 游戏阶段加载玩家-动画状态变量 √
   
   const [indicator_y, setindicator_y] = useState(0);  // 紫色指示器动画
  
@@ -42,8 +43,17 @@ function App() {
   });
 
   game.game_loadComponent_init((playerList,i)=>{    // 游戏开始加载玩家动画实体函数
-    setplayer_componentss(prev => [...prev,  <PlayerRankInfo player={playerList[i]} key={i} />]);
+    setplayer_components(prev => [...prev,  <PlayerRankInfo player={playerList[i]} key={i} />]);
   });
+
+  game.game_loadFightComponent_init((playerList,i)=>{
+    setplayerFight_components(prev=>[...prev, <PlayerFightInfo player={playerList[i]} key={i} />]);
+  });
+
+  game.game_clearFightCpmponet_init(()=>{
+    setplayerFight_components([]);
+  });
+  
 
   game.game_Indicator_yAnimation_init((playerPointer)=>{    // 紫色玩家指示器动画实体函数
     setindicator_y(10+playerPointer*50);
@@ -125,13 +135,39 @@ function App() {
           <div id="action_bar">
             <motion.div className="action_button" onClick={() => game.betAction()} whileTap={{scale:0.9, backgroundColor:"rgb(0,0,0)"}} >Bet</motion.div>
             <motion.div className="action_button" onClick={() => game.blindBetAction()} whileTap={{scale:0.9, backgroundColor:"rgb(0,0,0)"}} whileHover={{backgroundColor:"rgb(175,175,175)"}}>Blind</motion.div>
-            <motion.div className="action_button" whileTap={{scale:0.9, backgroundColor:"rgb(0,0,0)"}} whileHover={{backgroundColor:"rgb(175,175,175)"}}>Fight</motion.div>
-            <motion.div className="action_button" onClick={() => game.flodAction()} whileTap={{scale:0.9, backgroundColor:"rgb(0,0,0)"}} whileHover={{backgroundColor:"rgb(175,175,175)"}}>Fold</motion.div>
+            <motion.div className="action_button" onClick={() => game.fightAction()} whileTap={{scale:0.9, backgroundColor:"rgb(0,0,0)"}} whileHover={{backgroundColor:"rgb(175,175,175)"}}>Fight</motion.div>
+            <motion.div className="action_button" onClick={() => game.flodAction(game.playerPointer)} whileTap={{scale:0.9, backgroundColor:"rgb(0,0,0)"}} whileHover={{backgroundColor:"rgb(175,175,175)"}}>Fold</motion.div>
           </div>
         </div>  {/* down */}
         
 
       </div>  {/* gameFrame */}
+
+      <motion.div id="fightFrame">  {/* fightFrame */}
+        <div id="beFighter">
+          <div style={{position:"relative",top:"25px"}}>
+            {playerFight_components}
+          </div>
+        </div>
+
+        <div id="fighter">
+          <div id="fighterID" style={{display:"none"}}>0</div>
+          <div id="fighterScore">0</div>
+          <div className="fightPrompt">挑战者</div>
+          <div id="fighterName">Fighter</div>   
+          <button className="fightVicButton" onClick={()=>{game.fighterWinButton()}}>WIN</button>
+        </div>
+
+        <div id="beFighter_2_fighter">
+          <div id="beFighterID" style={{display:"none"}}>0</div>
+          <div id="fighter_2_Score">0</div>
+          <div className="fightPrompt">被挑战者</div>
+          <div id="fighter_2_Name">Fighter</div>  
+          <button className="fightVicButton" onClick={()=>{game.beFighterWinButton()}}>WIN</button>   
+        </div>
+      </motion.div>
+
+
 
       <motion.div id="indicatorDiv" animate={{y:indicator_y}}>  {/* 紫色玩家行动指示器 */}
         <motion.div  id="indicator" animate={{rotate:[90,180,270,360]}} transition={{repeat:Infinity,duration:1.5}}></motion.div>
@@ -152,7 +188,7 @@ const PlayerInfo = (props) => {
   let temperoColor = props.color;
   return(
     <motion.div id="playerInfoinReady" transition={{duration:0.5,type:"spring"}} initial={{x:100,opacity:0}} animate={{x:0,opacity:1, backgroundColor:temperoColor}}>
-      <div>{props.name}</div>
+      <div>{"> "+props.name}</div>
     </motion.div>
   );
 }
@@ -168,6 +204,20 @@ const PlayerRankInfo = (props) => {
     </motion.div>
   );
 }
+
+const PlayerFightInfo = (props) => {
+  let player = props.player;
+
+  return(
+      <motion.div className="playerFightRank" transition={{duration:0.5,type:"spring"}} initial={{x:100,opacity:0}} animate={{x:0,opacity:1}}>
+        <button className="fightButton" onClick={()=>{game.fightWith(player.id)}}>Fight</button>
+        <motion.div id={"ScoreinRankPlayer"+player.id} className="playerScoreinRank" animate={{x:0,opacity:1, backgroundColor:player.color}}> {player.score} </motion.div>
+        <div style={{float:"left",width:"15px"}}> - </div>
+        <div style={{float:"left",textAlign:"left"}}>{player.name}</div>
+      </motion.div>
+  );
+}
+
 
 
 export default App;
