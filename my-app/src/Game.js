@@ -207,7 +207,7 @@ export class Game{
       else
 	  {
 		console.log("this.get_numberIndicator()"+this.get_numberIndicator())
-		if(this.get_numberIndicator()>=999)
+		if(this.get_numberIndicator()*10+number>=999)
 		{
 			alert("请输入小于999的值");
 			return;
