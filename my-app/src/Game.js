@@ -366,6 +366,9 @@ export class Game{
 			animate("#fighter",{x:-250,y:[0,-15]},{duration:0.75,type:"spring"});
 			animate("#beFighter_2_fighter",{x:0,y:[-400]},{duration:0.75,type:"spring"});
 		}, 100);
+
+		document.getElementById("fighterVicButton").style.display = "block";
+		document.getElementById("befighterVicButton").style.display = "block";
 	}
 
 	fighterWinButton()
@@ -383,6 +386,8 @@ export class Game{
 			document.getElementById("beFighter_2_fighter").style.display = "none";
 			animate("#fighter",{x:0,y:[0]},{duration:1,type:"spring"});
 			animate("#beFighter_2_fighter",{x:0,y:[0]},{duration:1,type:"spring"});
+			document.getElementById("fighterVicButton").style.display = "none";
+			document.getElementById("befighterVicButton").style.display = "none";
 		}, 700);
 
 	}
@@ -402,6 +407,8 @@ export class Game{
 			document.getElementById("beFighter_2_fighter").style.display = "none";
 			animate("#fighter",{x:0,y:[0]},{duration:1,type:"spring"});
 			animate("#beFighter_2_fighter",{x:0,y:[0]},{duration:1,type:"spring"});
+			document.getElementById("fighterVicButton").style.display = "none";
+			document.getElementById("befighterVicButton").style.display = "none";
 		}, 700);
 	}
 

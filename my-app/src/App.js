@@ -155,7 +155,7 @@ function App() {
           <div id="fighterScore">0</div>
           <div className="fightPrompt">挑战者</div>
           <div id="fighterName">Fighter</div>   
-          <button className="fightVicButton" onClick={()=>{game.fighterWinButton()}}>WIN</button>
+          <button id="fighterVicButton" className="fightVicButton" onClick={()=>{game.fighterWinButton()}}>WIN</button>
         </div>
 
         <div id="beFighter_2_fighter">
@@ -163,7 +163,7 @@ function App() {
           <div id="fighter_2_Score">0</div>
           <div className="fightPrompt">被挑战者</div>
           <div id="fighter_2_Name">Fighter</div>  
-          <button className="fightVicButton" onClick={()=>{game.beFighterWinButton()}}>WIN</button>   
+          <button id="befighterVicButton" className="fightVicButton" onClick={()=>{game.beFighterWinButton()}}>WIN</button>   
         </div>
       </motion.div>
 

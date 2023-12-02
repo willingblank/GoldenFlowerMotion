@@ -421,4 +421,16 @@
   line-height: 10px;
   font-family:"Times New Roman", Times, serif;
   font-weight:bold;
+  position: relative;
+  left: 95px;
+}
+
+#fighterVicButton
+{
+  display: none;
+}
+
+#befighterVicButton
+{
+  display: none;
 }
