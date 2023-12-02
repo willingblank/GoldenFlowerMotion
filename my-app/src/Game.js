@@ -328,7 +328,8 @@ export class Game{
 		this.playerScoreSet(this.playerPointer,this.lastNumberIndicator*(-1));
 
 		animate("#rank_bar",{y:30,opacity:0},{duration:0.5});
-		animate("#fightFrame",{y:[-1000+300],opacity:[0,1]},{duration:2,type:"spring"});
+		document.getElementById("fightFrame").style.display="block";
+		animate("#fightFrame",{y:[-100],opacity:[0,1]},{duration:2,type:"spring"});
 
 		for(let i=0;i<(this.playerNumber);i++)
 		{
@@ -373,11 +374,12 @@ export class Game{
 		this.flodAction(fightLoser);
 
 		animate("#rank_bar",{y:0,opacity:0.7},{duration:0.5});
-		animate("#fightFrame",{y:[-700,-200],opacity:[0]},{duration:0.5,type:"easeOut"});
+		animate("#fightFrame",{y:[-100,0],opacity:[0]},{duration:0.5,type:"easeOut"});
 		animate("#beFighter",{opacity:1});
 		this.game_clearFightCpmponet_p();
 
 		setTimeout(() => {
+			document.getElementById("fightFrame").style.display="none";
 			document.getElementById("beFighter_2_fighter").style.display = "none";
 			animate("#fighter",{x:0,y:[0]},{duration:1,type:"spring"});
 			animate("#beFighter_2_fighter",{x:0,y:[0]},{duration:1,type:"spring"});
@@ -391,11 +393,12 @@ export class Game{
 		this.flodAction(fightLoser);
 
 		animate("#rank_bar",{y:0,opacity:0.7},{duration:0.5});
-		animate("#fightFrame",{y:[-700,-200],opacity:[0]},{duration:0.5,type:"easeOut"});
+		animate("#fightFrame",{y:[-100,0],opacity:[0]},{duration:0.5,type:"easeOut"});
 		animate("#beFighter",{opacity:1});
 		this.game_clearFightCpmponet_p();
 
 		setTimeout(() => {
+			document.getElementById("fightFrame").style.display="none";
 			document.getElementById("beFighter_2_fighter").style.display = "none";
 			animate("#fighter",{x:0,y:[0]},{duration:1,type:"spring"});
 			animate("#beFighter_2_fighter",{x:0,y:[0]},{duration:1,type:"spring"});

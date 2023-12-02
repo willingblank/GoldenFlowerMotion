@@ -5,11 +5,11 @@
 #totalFrame
 {
   position: absolute;
-  top: -250px;
-  left: -150px;
+  top: -85px;
+  left: -45px;
 
   opacity: 0.5;
-  scale: 0.25;
+  scale: 0.7;
   width: 500px;
   height: 800px;
   background-color: rgb(165, 190, 200);
@@ -298,12 +298,13 @@
   background-color: transparent;
   position: absolute;
   opacity: 0;
-  top:  1000px;
+  top:  400px;
   left: 0px;
   width: 500px;
   height: 400px;
   border-radius: 25px;
   z-index: 1;
+  display: none;
 }
 
 .playerFightRank
