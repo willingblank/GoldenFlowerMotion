@@ -105,9 +105,28 @@ export class Game{
 			this.errorHandle("最大游戏人数8人");
 			return;
 		}
-	
+
 		let namevalue = document.getElementById("name").value;
 		let temp_color = document.getElementById("playerAttributesCollecter").style.backgroundColor;
+		if(namevalue == "")
+		{
+			this.errorHandle("请输入昵称后添加玩家.");
+			return;
+		}
+		for(let i=0;i<this.playerNumber;i++)
+		{
+			if(namevalue == this.playerList[i].name)
+			{
+				this.errorHandle("请勿添加昵称相同的玩家.");
+				return;
+			}
+			if(temp_color == this.playerList[i].color)
+			{
+				this.errorHandle("请勿选择重复的颜色.")
+				return;
+			}
+		}
+
 		document.getElementById("name").value = null;           
 	
 		if(namevalue!= null)

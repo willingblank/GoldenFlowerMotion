@@ -35,7 +35,7 @@ function App() {
 
   function handleColorChange(hex)   // 准备阶段颜色变化实体函数
   {
-    animate(color_count, hex.hex, { duration: 0.5 });
+    animate(color_count, hex.hex, { duration: 0.25 });
   }
 
   game.game_addComponent_init((playerName,color)=>{   // 准备阶段添加玩家动画实体函数
