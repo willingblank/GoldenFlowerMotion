@@ -18,6 +18,7 @@ export class Game{
         this.playerPointer = -1;
         this.playerNumber = 0;
         this.playerList = new Array();
+		this.tempIndicatorFlag = 0;
     }
 
     game_JackPotAnimation_init(functionPointer)
@@ -202,6 +203,7 @@ export class Game{
     nextPlayer()
     {
 		// 玩家指针指向下一个玩家
+		this.tempIndicatorFlag = 0;
 		do
 		{
 			console.log("next player");
@@ -228,7 +230,11 @@ export class Game{
       this.set_numberIndicator(0);
       else
 	  {
-		console.log("this.get_numberIndicator()"+this.get_numberIndicator())
+		if(this.tempIndicatorFlag == 0)
+		{
+			this.set_numberIndicator(0);
+			this.tempIndicatorFlag = 1;
+		}
 		if(this.get_numberIndicator()*10+number>=999)
 		{
 			alert("请输入小于999的值");
@@ -311,6 +317,7 @@ export class Game{
         if(this.numberIndicator<this.lastNumberIndicator)
         {
           this.errorHandle("请输入大于"+this.lastNumberIndicator+"的值");
+		  this.set_numberIndicator(0);
           return;
         }
 		this.playerList[this.playerPointer].state = "checked";
@@ -333,6 +340,7 @@ export class Game{
 		if(this.numberIndicator<(this.lastNumberIndicator/2))
         {
           this.errorHandle("请输入大于"+(this.lastNumberIndicator/2)+"的值");
+		  this.set_numberIndicator(0);
           return;
         }
 		this.lastNumberIndicator = this.numberIndicator*2;
