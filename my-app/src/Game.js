@@ -19,6 +19,7 @@ export class Game{
         this.playerNumber = 0;
         this.playerList = new Array();
 		this.tempIndicatorFlag = 0;
+		this.actionTimes = 0;
     }
 
     game_JackPotAnimation_init(functionPointer)
@@ -268,6 +269,7 @@ export class Game{
 	{
 		this.set_numberIndicator(0);
         this.lastNumberIndicator = 1;
+		this.actionTimes = 0;
 		for(let i=0;i<(this.playerNumber);i++)
 		{
 			this.playerList[i].state = "playing";
@@ -320,6 +322,7 @@ export class Game{
 		  this.set_numberIndicator(0);
           return;
         }
+		this.actionTimes++;
 		this.playerList[this.playerPointer].state = "checked";
         this.lastNumberIndicator = this.numberIndicator;
         this.add_jackPotVal(this.numberIndicator);
@@ -343,6 +346,7 @@ export class Game{
 		  this.set_numberIndicator(0);
           return;
         }
+		this.actionTimes++;
 		this.lastNumberIndicator = this.numberIndicator*2;
 		this.add_jackPotVal(this.numberIndicator);
 		this.playerScoreSet(this.playerPointer,-this.numberIndicator);
@@ -353,7 +357,11 @@ export class Game{
 	{
 		if(this.gameState == "preparing")
 			return;
-
+		if(this.actionTimes<this.playerNumber)
+		{
+			this.errorHandle("第一轮无法进行Fight操作.")
+			return;
+		}
 		document.getElementById("safeLayer").style.display="block";
 		this.add_jackPotVal(this.lastNumberIndicator);
 		this.playerScoreSet(this.playerPointer,this.lastNumberIndicator*(-1));
@@ -449,7 +457,7 @@ export class Game{
 	{
 		if(this.gameState == "preparing")
 			return;
-
+		this.actionTimes++;
 		this.playerList[who].state = "idle";
 		this.nextPlayer();
 	}

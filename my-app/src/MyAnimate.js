@@ -50,7 +50,7 @@ export class MyAnimate
 
         setTimeout(() => {
 			animate("#"+"ScoreinRankPlayer"+playerp,
-			{x:[0,225],y:[0,(3.5-playerp)*50],scale:[1,2],opacity:[1]},{duration:0.3});
+			{x:[0,220],y:[0,(3.5-playerp)*50],scale:[1,2],opacity:[1]},{duration:0.3});
 
             animate("#rank_bar",{opacity:1});
 		}, 250);
