@@ -174,8 +174,9 @@ function App() {
       </motion.div>
 
       <motion.div id="victoryCel">  {/* 胜利玩家庆祝指示器 */}
-
       </motion.div>
+
+      <div id="safeLayer"></div> {/* 阻挡层 防止玩家进行错误的按钮操作 */}
 
     </div> 
     
