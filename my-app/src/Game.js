@@ -106,7 +106,7 @@ export class Game{
 			return;
 		}
 	
-		let namevalue = document.getElementById("name").value ;
+		let namevalue = document.getElementById("name").value;
 		let temp_color = document.getElementById("playerAttributesCollecter").style.backgroundColor;
 		document.getElementById("name").value = null;           
 	
@@ -122,14 +122,17 @@ export class Game{
 
     startGameAction()
     {
-		this.gameState = "gaming";
+		
 		if(this.playerNumber<2)
 		{
 			this.errorHandle("需要游戏人数大于2人才可开始游戏!");
 			return;
 		}	
+
+		this.gameState = "gaming";
 		console.log("game start!");
 		console.log(this.playerList);	
+		document.getElementById("safeLayer").style.display="none";
 		animate("#readyFrame",{opacity:0},{duration:0.35});
 		setTimeout(()=>{document.getElementById("readyFrame").style.display="none";},500);
 
@@ -324,6 +327,7 @@ export class Game{
 		if(this.gameState == "preparing")
 			return;
 
+		document.getElementById("safeLayer").style.display="block";
 		this.add_jackPotVal(this.lastNumberIndicator);
 		this.playerScoreSet(this.playerPointer,this.lastNumberIndicator*(-1));
 
@@ -388,6 +392,7 @@ export class Game{
 			animate("#beFighter_2_fighter",{x:0,y:[0]},{duration:1,type:"spring"});
 			document.getElementById("fighterVicButton").style.display = "none";
 			document.getElementById("befighterVicButton").style.display = "none";
+			document.getElementById("safeLayer").style.display="none";
 		}, 700);
 
 	}
@@ -409,6 +414,7 @@ export class Game{
 			animate("#beFighter_2_fighter",{x:0,y:[0]},{duration:1,type:"spring"});
 			document.getElementById("fighterVicButton").style.display = "none";
 			document.getElementById("befighterVicButton").style.display = "none";
+			document.getElementById("safeLayer").style.display="none";
 		}, 700);
 	}
 
