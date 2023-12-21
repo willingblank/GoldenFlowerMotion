@@ -107,7 +107,9 @@ function App() {
         </div> {/* up */}
         
         <div id="down">
-          <div id="history_bar"></div>
+          <div id="history_bar">
+            <motion.div id="goBack" onClick={()=> game.goBackButton()} whileTap={{scale:0.9, backgroundColor:"rgb(175,175,175)"}} whileHover={{scale:1.1}}>Crtl-Z</motion.div>
+          </div>
 
           <div id="number_bar">
             <div>

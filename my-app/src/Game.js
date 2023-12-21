@@ -115,6 +115,11 @@ export class Game{
 			this.errorHandle("请输入昵称后添加玩家.");
 			return;
 		}
+		if(temp_color === "rgb(0, 0, 0)")
+		{
+			this.errorHandle("请勿选择黑色.")
+			return;
+		}
 		for(let i=0;i<this.playerNumber;i++)
 		{
 			if(namevalue == this.playerList[i].name)
@@ -273,6 +278,7 @@ export class Game{
 		for(let i=0;i<(this.playerNumber);i++)
 		{
 			this.playerList[i].state = "playing";
+			animate("#ScoreinRankPlayer"+i,{backgroundColor:this.playerList[i].color});
 		}	
 
 		setTimeout(() => {
@@ -459,7 +465,12 @@ export class Game{
 			return;
 		this.actionTimes++;
 		this.playerList[who].state = "idle";
+		animate("#ScoreinRankPlayer"+who,{backgroundColor:"rgb(0, 0, 0)"});
 		this.nextPlayer();
 	}
 
+	goBackButton()
+	{
+		// waiting for realize...
+	}
 }
