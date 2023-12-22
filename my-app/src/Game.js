@@ -380,6 +380,12 @@ export class Game{
 		  this.set_numberIndicator(Math.ceil(this.lastNumberIndicator/2));
           return;
         }
+		if(this.numberIndicator>=500)
+		{
+			this.errorHandle("请输入小于"+500+"的值");
+			this.set_numberIndicator(499);
+			return;
+		}
 		this.gameBackup();
 		this.actionTimes++;
 		this.totalActionTimes++;
