@@ -518,6 +518,8 @@ export class Game{
 	{
 		if(this.totalActionTimes < 1)
 			return;
+		if(this.gameState == "preparing")
+			return;
 		let tempThis = this;
 		tempThis = _.cloneDeep(lastGame);
 		Object.assign(this,tempThis);
