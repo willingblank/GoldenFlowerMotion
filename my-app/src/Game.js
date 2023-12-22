@@ -98,6 +98,12 @@ export class Game{
     {
         this.jackPotVal = val;
 		myGameAnimate.JackPotAnimation_run();
+		setTimeout(() => {
+			for(let i=0;i<this.playerNumber;i++)
+			{
+				animate("#RateBox"+i,{width: (this.playerList[i].moneyPaid/this.jackPotVal*375)+"px"});
+			}
+		}, 50);
     }
 
     get_jackPotVal()
