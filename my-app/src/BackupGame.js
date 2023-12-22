@@ -18,6 +18,7 @@ export class BackupGame{
         this.playerList = new Array();
 		this.tempIndicatorFlag = 0;
 		this.actionTimes = 0;
+        this.totalActionTimes = 0;
     }
 
 }

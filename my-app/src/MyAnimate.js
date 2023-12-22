@@ -61,12 +61,12 @@ export class MyAnimate
 		}, 600);
 
         setTimeout(() => {
-		    animate("#victoryCel",{opacity:[1,1],width:[500,100],height:[800,100],x:200,y:[150],borderRadius:150},{duration:1,type:"spring"});
+		    animate("#victoryCel",{opacity:[1,1],width:[500,100],height:[800,100],x:200,y:[150],borderRadius:"50%"},{duration:1,type:"spring"});
         }, 250);
 
         setTimeout(() => {
-		    animate("#victoryCel",{opacity:0,borderRadius:25},{duration:0.45,type:"spring"});
-        }, 1000);
+		    animate("#victoryCel",{opacity:0,borderRadius:"5%"},{duration:0.45,type:"spring"});
+        }, 1300);
 
         //================================ winnerAnimate over ================================
         setTimeout(() => {

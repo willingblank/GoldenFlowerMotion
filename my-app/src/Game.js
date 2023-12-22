@@ -23,6 +23,7 @@ export class Game{
         this.playerList = new Array();
 		this.tempIndicatorFlag = 0;
 		this.actionTimes = 0;
+		this.totalActionTimes = 0;
     }
 
     game_JackPotAnimation_init(functionPointer)
@@ -226,7 +227,7 @@ export class Game{
     nextPlayer()
     {
 		// 玩家指针指向下一个玩家
-		this.tempIndicatorFlag = 0;
+		//this.tempIndicatorFlag = 0;
 		do
 		{
 			console.log("next player");
@@ -355,6 +356,7 @@ export class Game{
         }
 		this.gameBackup();
 		this.actionTimes++;
+		this.totalActionTimes++;
 		this.playerList[this.playerPointer].state = "checked";
         this.lastNumberIndicator = this.numberIndicator;
         this.add_jackPotVal(this.numberIndicator);
@@ -380,6 +382,7 @@ export class Game{
         }
 		this.gameBackup();
 		this.actionTimes++;
+		this.totalActionTimes++;
 		this.lastNumberIndicator = this.numberIndicator*2;
 		this.add_jackPotVal(this.numberIndicator);
 		this.playerScoreAdd(this.playerPointer,-this.numberIndicator);
@@ -502,6 +505,7 @@ export class Game{
 			return;
 		this.gameBackup();
 		this.actionTimes++;
+		this.totalActionTimes++;
 		this.outRound(who);
 	}
 
@@ -512,7 +516,7 @@ export class Game{
 
 	goBackButton()
 	{
-		if(this.actionTimes<1)
+		if(this.totalActionTimes < 1)
 			return;
 		let tempThis = this;
 		tempThis = _.cloneDeep(lastGame);
