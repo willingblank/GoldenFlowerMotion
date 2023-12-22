@@ -1,8 +1,11 @@
 import { animate } from "framer-motion";
 import { MyAnimate } from "./MyAnimate";
 import { Player } from "./Player";
+import { BackupGame } from "./BackupGame";
+import _ from 'lodash'; 
 
 var myGameAnimate = new MyAnimate();
+var lastGame = new BackupGame();
 
 export class Game{
     constructor()
@@ -144,6 +147,11 @@ export class Game{
 		
 		this.playerNumber++;
 		this.game_addComponent_p(namevalue,temp_color);
+
+		let randomColorR = Math.floor(Math.random()*255);
+		let randomColorG = Math.floor(Math.random()*255);
+		let randomColorB = Math.floor(Math.random()*255);
+		animate("#playerAttributesCollecter",{backgroundColor:"rgb("+randomColorR+", "+randomColorG+", "+randomColorB+")"});
     }
 
     startGameAction()
@@ -180,7 +188,7 @@ export class Game{
 			for(let i=0;i<(this.playerNumber);i++)
 			{
 				setTimeout(() => {
-					this.playerScoreSet(i,-1);
+					this.playerScoreAdd(i,-1);
 					this.add_jackPotVal(1);
 				}, 100*i);
 			}
@@ -190,6 +198,15 @@ export class Game{
     }
 
 	playerScoreSet(who,val)
+	{
+		this.playerList[who].score = val;
+		document.getElementById("ScoreinRankPlayer"+this.playerList[who].id).innerText=this.playerList[who].score;
+		animate("#"+"ScoreinRankPlayer"+this.playerList[who].id,
+		{x:[0,5,0]},{duration:0.25}
+		);
+	}
+
+	playerScoreAdd(who,val)
 	{
 		this.playerList[who].score += val;
 		document.getElementById("ScoreinRankPlayer"+this.playerList[who].id).innerText=this.playerList[who].score;
@@ -222,6 +239,14 @@ export class Game{
 		if(this.checkmate())
 			this.littleWinner(this.playerPointer);
 		
+		if(this.actionTimes>=this.playerNumber)
+		{
+			if(this.playerList[this.playerPointer].state == "checked")
+				this.set_numberIndicator(this.lastNumberIndicator);
+			else
+				this.set_numberIndicator(Math.ceil(this.lastNumberIndicator/2));
+		}
+
 		console.log("playerPointer = "+this.playerPointer);
 	
 		document.getElementById("victoryCel").style.backgroundColor = this.playerList[this.playerPointer].color;
@@ -287,7 +312,7 @@ export class Game{
 				for(let i=0;i<(this.playerNumber);i++)
 				{
 					setTimeout(() => {
-						this.playerScoreSet(i,-1);
+						this.playerScoreAdd(i,-1);
 						this.add_jackPotVal(1);
 					}, 100*i);
 				}
@@ -325,14 +350,15 @@ export class Game{
         if(this.numberIndicator<this.lastNumberIndicator)
         {
           this.errorHandle("请输入大于"+this.lastNumberIndicator+"的值");
-		  this.set_numberIndicator(0);
+		  this.set_numberIndicator(this.lastNumberIndicator);
           return;
         }
+		this.gameBackup();
 		this.actionTimes++;
 		this.playerList[this.playerPointer].state = "checked";
         this.lastNumberIndicator = this.numberIndicator;
         this.add_jackPotVal(this.numberIndicator);
-		this.playerScoreSet(this.playerPointer,-this.numberIndicator);
+		this.playerScoreAdd(this.playerPointer,-this.numberIndicator);
         this.nextPlayer();
     }
 
@@ -349,13 +375,14 @@ export class Game{
 		if(this.numberIndicator<(this.lastNumberIndicator/2))
         {
           this.errorHandle("请输入大于"+(this.lastNumberIndicator/2)+"的值");
-		  this.set_numberIndicator(0);
+		  this.set_numberIndicator(Math.ceil(this.lastNumberIndicator/2));
           return;
         }
+		this.gameBackup();
 		this.actionTimes++;
 		this.lastNumberIndicator = this.numberIndicator*2;
 		this.add_jackPotVal(this.numberIndicator);
-		this.playerScoreSet(this.playerPointer,-this.numberIndicator);
+		this.playerScoreAdd(this.playerPointer,-this.numberIndicator);
 		this.nextPlayer();
 	}
 
@@ -368,9 +395,10 @@ export class Game{
 			this.errorHandle("第一轮无法进行Fight操作.")
 			return;
 		}
+		this.gameBackup();
 		document.getElementById("safeLayer").style.display="block";
 		this.add_jackPotVal(this.lastNumberIndicator);
-		this.playerScoreSet(this.playerPointer,this.lastNumberIndicator*(-1));
+		this.playerScoreAdd(this.playerPointer,this.lastNumberIndicator*(-1));
 
 		animate("#rank_bar",{y:30,opacity:0},{duration:0.5});
 		document.getElementById("fightFrame").style.display="block";
@@ -419,7 +447,8 @@ export class Game{
 	fighterWinButton()
 	{
 		let fightLoser = document.getElementById("beFighterID").innerText;
-		this.flodAction(fightLoser);
+		//this.flodAction(fightLoser);
+		this.outRound(fightLoser);
 
 		animate("#rank_bar",{y:0,opacity:0.7},{duration:0.5});
 		animate("#fightFrame",{y:[-100,0],opacity:[0]},{duration:0.5,type:"easeOut"});
@@ -441,7 +470,8 @@ export class Game{
 	beFighterWinButton()
 	{
 		let fightLoser = document.getElementById("fighterID").innerText;
-		this.flodAction(fightLoser);
+		//this.flodAction(fightLoser);
+		this.outRound(fightLoser);
 
 		animate("#rank_bar",{y:0,opacity:0.7},{duration:0.5});
 		animate("#fightFrame",{y:[-100,0],opacity:[0]},{duration:0.5,type:"easeOut"});
@@ -459,18 +489,43 @@ export class Game{
 		}, 700);
 	}
 
-	flodAction(who)
+	outRound(who)
 	{
-		if(this.gameState == "preparing")
-			return;
-		this.actionTimes++;
 		this.playerList[who].state = "idle";
 		animate("#ScoreinRankPlayer"+who,{backgroundColor:"rgb(0, 0, 0)"});
 		this.nextPlayer();
 	}
 
+	flodAction(who)
+	{
+		if(this.gameState == "preparing")
+			return;
+		this.gameBackup();
+		this.actionTimes++;
+		this.outRound(who);
+	}
+
+	gameBackup()
+	{
+		lastGame = _.cloneDeep(this);
+	}
+
 	goBackButton()
 	{
-		// waiting for realize...
+		if(this.actionTimes<1)
+			return;
+		let tempThis = this;
+		tempThis = _.cloneDeep(lastGame);
+		Object.assign(this,tempThis);
+
+		// -----------animate--------------
+		myGameAnimate.Indicator_yAnimation_run(this.playerPointer);
+		this.set_jackPotVal(this.jackPotVal);
+		for(let i=0;i<this.playerNumber;i++)
+		{
+			this.playerScoreSet(i,this.playerList[i].score);
+			if(this.playerList[i].state != "idle")
+				animate("#ScoreinRankPlayer"+i,{backgroundColor:this.playerList[i].color});
+		}
 	}
 }
