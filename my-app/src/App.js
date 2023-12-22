@@ -104,6 +104,7 @@ function App() {
           <div    id="value_bar">
             <motion.div id="Numerical_indicator">{numberIndicator_rounded}</motion.div> {/* 数字指示器 */}
           </div> {/* value_bar */}  
+          <div id="rateBar"></div>
         </div> {/* up */}
         
         <div id="down">

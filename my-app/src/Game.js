@@ -86,6 +86,12 @@ export class Game{
     {
         this.jackPotVal += val;
 		myGameAnimate.JackPotAnimation_run();
+		setTimeout(() => {
+			for(let i=0;i<this.playerNumber;i++)
+			{
+				animate("#RateBox"+i,{width: (this.playerList[i].moneyPaid/this.jackPotVal*375)+"px"});
+			}
+		}, 50);
     }
 
     set_jackPotVal(val)
@@ -106,9 +112,9 @@ export class Game{
 
     addPlayerACtion()
     {
-		if(this.playerNumber > 7)
+		if(this.playerNumber > 6)
 		{
-			this.errorHandle("最大游戏人数8人");
+			this.errorHandle("最大游戏人数7人");
 			return;
 		}
 
@@ -176,6 +182,7 @@ export class Game{
 		for(let i=0;i<(this.playerNumber);i++)
 		{
 			this.playerList[i].state = "playing";
+			this.createRateBox(i);
 		}	
 
 		for(let i=0;i<(this.playerNumber);i++)
@@ -210,6 +217,7 @@ export class Game{
 	playerScoreAdd(who,val)
 	{
 		this.playerList[who].score += val;
+		this.playerList[who].moneyPaid -= val;
 		document.getElementById("ScoreinRankPlayer"+this.playerList[who].id).innerText=this.playerList[who].score;
 		animate("#"+"ScoreinRankPlayer"+this.playerList[who].id,
 		{x:[0,5,0]},{duration:0.25}
@@ -304,6 +312,7 @@ export class Game{
 		for(let i=0;i<(this.playerNumber);i++)
 		{
 			this.playerList[i].state = "playing";
+			this.playerList[i].moneyPaid = 0;
 			animate("#ScoreinRankPlayer"+i,{backgroundColor:this.playerList[i].color});
 		}	
 
@@ -340,7 +349,10 @@ export class Game{
 
 	endingGame()
 	{
-
+		//return jackpot entry score
+		//find loser
+		//find max loser to give max winner
+		//then loop
 	}
 
     betAction()
@@ -539,5 +551,17 @@ export class Game{
 			if(this.playerList[i].state != "idle")
 				animate("#ScoreinRankPlayer"+i,{backgroundColor:this.playerList[i].color});
 		}
+	}
+
+	createRateBox(id)
+	{
+		var createDiv=document.createElement("div");  
+		createDiv.id="RateBox"+id;
+		createDiv.style.width = "1px";
+		createDiv.style.height = "25px";
+		createDiv.style.float = "left";
+		createDiv.style.borderRadius = "5%";
+		createDiv.style.backgroundColor = this.playerList[id].color;
+		document.getElementById("rateBar").appendChild(createDiv);
 	}
 }

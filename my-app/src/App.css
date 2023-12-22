@@ -464,3 +464,11 @@
   user-select: none;
 }
 
+#rateBar
+{
+  width: 375px;
+  height: 25px;
+  position: relative;
+  top: 375px;
+}
+

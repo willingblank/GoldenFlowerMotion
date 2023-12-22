@@ -9,6 +9,7 @@ export class Player
         this.score = 0;
         this.state = "idle";
         this.scoreColor = "green";
+        this.moneyPaid = 0;
     }
 }
 
