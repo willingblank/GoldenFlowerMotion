@@ -556,6 +556,8 @@ export class Game{
 			this.playerScoreSet(i,this.playerList[i].score);
 			if(this.playerList[i].state != "idle")
 				animate("#ScoreinRankPlayer"+i,{backgroundColor:this.playerList[i].color});
+			else if(this.playerList[i].state === "idle")
+				animate("#ScoreinRankPlayer"+i,{backgroundColor:"rgb(0, 0, 0)"});
 		}
 	}
 
