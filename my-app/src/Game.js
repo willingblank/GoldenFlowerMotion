@@ -118,9 +118,9 @@ export class Game{
 
     addPlayerACtion()
     {
-		if(this.playerNumber > 6)
+		if(this.playerNumber > 7)
 		{
-			this.errorHandle("最大游戏人数7人");
+			this.errorHandle("最大游戏人数8人");
 			return;
 		}
 
