@@ -180,7 +180,7 @@ function App() {
       </motion.div>
 
       <div id="safeLayer"></div> {/* 阻挡层 防止玩家进行错误的按钮操作 */}
-      <div id="endingBar"><motion.div id="endingGame" onClick={()=>game.endingGame()}>Ending_Game</motion.div></div>
+      <motion.div id="endingGame" onClick={()=>game.endingGame()}>Ending_Game</motion.div>
       
     </div> 
     

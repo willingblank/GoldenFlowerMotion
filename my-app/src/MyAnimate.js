@@ -61,7 +61,7 @@ export class MyAnimate
 		}, 600);
 
         setTimeout(() => {
-		    animate("#victoryCel",{opacity:[1,1],width:[500,100],height:[825,100],x:200,y:[150],borderRadius:"50%"},{duration:1,type:"spring"});
+		    animate("#victoryCel",{opacity:[1,1],width:[500,100],height:[815,100],x:200,y:[150],borderRadius:"50%"},{duration:1,type:"spring"});
         }, 250);
 
         setTimeout(() => {
@@ -77,7 +77,7 @@ export class MyAnimate
         }, 1600);
 
         setTimeout(() => {
-		    animate("#victoryCel",{opacity:[0,1],width:500,height:825,x:0,y:0},{duration:1,type:"spring"});
+		    animate("#victoryCel",{opacity:[0,1],width:500,height:815,x:0,y:0},{duration:1,type:"spring"});
         }, 2000);
 
     }

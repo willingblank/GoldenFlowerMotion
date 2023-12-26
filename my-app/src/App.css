@@ -11,7 +11,7 @@
   opacity: 0.5;
   scale: 0.7;
   width: 500px;
-  height: 825px;
+  height: 815px;
   background-color: rgb(165, 190, 200);
   border-radius: 5%;
 }
@@ -21,7 +21,7 @@
   background-color: rgb(150, 150, 150);
   opacity: 0.5;
   width: 500px;
-  height: 825px;
+  height: 815px;
   z-index: 3;  
   position: absolute;
   top: 0px;
@@ -122,7 +122,7 @@
 #up
 {
   width: 500px;
-  height: 425px;
+  height: 415px;
   background-color: transparent;
   text-align: center;
 }
@@ -225,7 +225,7 @@
   opacity: 1;
   left: 375px;
   width: 150px;
-  height: 425px;
+  height: 415px;
   background-color: transparent;
   position: absolute;
   z-index: 1;
@@ -301,7 +301,7 @@
   top:  0px;
   left: 0px;
   width: 500px;
-  height: 825px;
+  height: 815px;
   border-radius: 25px;
   z-index: -1;
 }
@@ -467,29 +467,22 @@
 #rateBar
 {
   width: 375px;
-  height: 25px;
+  height: 15px;
   position: relative;
   top: 400px;
 }
 
-#endingBar
-{
-  width: 500px;
-  height: 25px;
-  background-color: rgb(150, 150, 150);
-}
 
 #endingGame
 {
   background-color: rgb(150, 150, 150);
-  width: 475px;
-  height: 25px;
-  float: right;
+  width: 500px;
+  height: 35px;
   user-select: none;
   border-radius: 3%;
   font-size: 20px;
-  font-family:"Times New Roman", Times, serif;
+  font-family: "Arial","Microsoft YaHei","宋体",sans-serif;
   font-weight:bold;
-  line-height: 25px;
-  /* text-align: center; */
+  line-height: 35px;
+  text-align: center;
 }

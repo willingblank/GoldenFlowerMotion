@@ -571,7 +571,7 @@ export class Game{
 		var createDiv=document.createElement("div");  
 		createDiv.id="RateBox"+id;
 		createDiv.style.width = "1px";
-		createDiv.style.height = "25px";
+		createDiv.style.height = "15px";
 		createDiv.style.float = "left";
 		createDiv.style.borderRadius = "5%";
 		createDiv.style.backgroundColor = this.playerList[id].color;
