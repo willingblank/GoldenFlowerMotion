@@ -171,7 +171,7 @@ function App() {
       </motion.div>
 
 
-
+      
       <motion.div id="indicatorDiv" animate={{y:indicator_y}}>  {/* 紫色玩家行动指示器 */}
         <motion.div  id="indicator" animate={{rotate:[90,180,270,360]}} transition={{repeat:Infinity,duration:1.5}}></motion.div>
       </motion.div>
@@ -180,7 +180,8 @@ function App() {
       </motion.div>
 
       <div id="safeLayer"></div> {/* 阻挡层 防止玩家进行错误的按钮操作 */}
-
+      <div id="endingBar"><motion.div id="endingGame" onClick={()=>game.endingGame()}>Ending_Game</motion.div></div>
+      
     </div> 
     
   );

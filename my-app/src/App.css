@@ -472,3 +472,24 @@
   top: 400px;
 }
 
+#endingBar
+{
+  width: 500px;
+  height: 25px;
+  background-color: rgb(150, 150, 150);
+}
+
+#endingGame
+{
+  background-color: rgb(150, 150, 150);
+  width: 475px;
+  height: 25px;
+  float: right;
+  user-select: none;
+  border-radius: 3%;
+  font-size: 20px;
+  font-family:"Times New Roman", Times, serif;
+  font-weight:bold;
+  line-height: 25px;
+  /* text-align: center; */
+}

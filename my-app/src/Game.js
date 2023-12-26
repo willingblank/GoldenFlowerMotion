@@ -323,7 +323,8 @@ export class Game{
 		}	
 
 		setTimeout(() => {
-			this.gameState = "gaming";
+			//this.gameState = "gaming";
+			this.gameState = "starting";
 			setTimeout(() => {
 				for(let i=0;i<(this.playerNumber);i++)
 				{
@@ -353,25 +354,21 @@ export class Game{
 			return false;
 	}
 
-	endingGame()
-	{
-		//return jackpot entry score
-		//find loser
-		//find max loser to give max winner
-		//then loop
-	}
+
 
     betAction()
     {
 		if(this.gameState == "preparing")
 			return;
-        console.log("game bet action");
+        
         if(this.numberIndicator<this.lastNumberIndicator)
         {
           this.errorHandle("请输入大于"+this.lastNumberIndicator+"的值");
 		  this.set_numberIndicator(this.lastNumberIndicator);
           return;
         }
+		console.log("game bet action");
+		this.gameState = "gaming";
 		this.gameBackup();
 		this.actionTimes++;
 		this.totalActionTimes++;
@@ -404,6 +401,7 @@ export class Game{
 			this.set_numberIndicator(499);
 			return;
 		}
+		this.gameState = "gaming";
 		this.gameBackup();
 		this.actionTimes++;
 		this.totalActionTimes++;
@@ -422,6 +420,7 @@ export class Game{
 			this.errorHandle("第一轮无法进行Fight操作.")
 			return;
 		}
+		this.gameState = "gaming";
 		this.gameBackup();
 		document.getElementById("safeLayer").style.display="block";
 		this.add_jackPotVal(this.lastNumberIndicator);
@@ -527,6 +526,7 @@ export class Game{
 	{
 		if(this.gameState == "preparing")
 			return;
+		this.gameState = "gaming";
 		this.gameBackup();
 		this.actionTimes++;
 		this.totalActionTimes++;
@@ -538,16 +538,8 @@ export class Game{
 		lastGame = _.cloneDeep(this);
 	}
 
-	goBackButton()
+	allAnimateFreash()
 	{
-		if(this.totalActionTimes < 1)
-			return;
-		if(this.gameState == "preparing")
-			return;
-		let tempThis = this;
-		tempThis = _.cloneDeep(lastGame);
-		Object.assign(this,tempThis);
-
 		// -----------animate--------------
 		myGameAnimate.Indicator_yAnimation_run(this.playerPointer);
 		this.set_jackPotVal(this.jackPotVal);
@@ -561,6 +553,19 @@ export class Game{
 		}
 	}
 
+	goBackButton()
+	{
+		if(this.totalActionTimes < 1)
+			return;
+		if(this.gameState == "preparing")
+			return;
+		let tempThis = this;
+		tempThis = _.cloneDeep(lastGame);
+		Object.assign(this,tempThis);
+
+		this.allAnimateFreash();
+	}
+
 	createRateBox(id)
 	{
 		var createDiv=document.createElement("div");  
@@ -571,5 +576,61 @@ export class Game{
 		createDiv.style.borderRadius = "5%";
 		createDiv.style.backgroundColor = this.playerList[id].color;
 		document.getElementById("rateBar").appendChild(createDiv);
+	}
+
+	endingGame()
+	{
+		//return jackpot entry score
+		//find loser
+		//find max loser to give max winner
+		//then loop
+		console.log("结算开始");
+		if(this.gameState !== "starting")
+			return;
+
+		this.set_jackPotVal(0);
+		for(let i=0;i<this.playerNumber;i++)
+			this.playerScoreAdd(i,1);
+		this.allAnimateFreash();
+
+		let minPlayer=this.playerList[0];
+		let maxPlayer=this.playerList[0];
+
+		for(let i=0;i<25;i++)
+		{
+			let zeroNumber = 0;
+			for(let i=0;i<this.playerNumber;i++)
+			{
+				if(this.playerList[i].score == 0)
+					zeroNumber++;
+
+				if(this.playerList[i].score<minPlayer.score)
+				{
+					minPlayer = this.playerList[i];
+				}
+				if(this.playerList[i].score>maxPlayer.score)
+				{
+					maxPlayer = this.playerList[i];
+				}
+			}
+			if(zeroNumber == this.playerNumber)
+				break;
+
+			if(-minPlayer.score < maxPlayer.score)
+			{
+				console.log("("+minPlayer.name+") -> ("+maxPlayer.name+") = "+-minPlayer.score);
+				maxPlayer.score += minPlayer.score;
+				minPlayer.score = 0;
+			}
+			else
+			{
+				console.log("("+minPlayer.name+") -> ("+maxPlayer.name+") = "+maxPlayer.score);
+				minPlayer.score += maxPlayer.score;
+				maxPlayer.score = 0;
+			}
+
+		}
+		console.log("结算结束");
+		this.gameState = "ending";
 	}
 }
