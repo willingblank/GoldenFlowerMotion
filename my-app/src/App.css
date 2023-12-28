@@ -468,6 +468,7 @@
 {
   width: 375px;
   height: 15px;
+  background-color: black;
   position: relative;
   top: 400px;
 }
@@ -475,7 +476,7 @@
 
 #endingGame
 {
-  background-color: rgb(150, 150, 150);
+  background-color: rgb(100, 100, 100);
   width: 500px;
   height: 35px;
   user-select: none;
@@ -485,4 +486,5 @@
   font-weight:bold;
   line-height: 35px;
   text-align: center;
+  opacity: 0.75;
 }

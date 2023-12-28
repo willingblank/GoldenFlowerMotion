@@ -86,10 +86,12 @@ export class Game{
     {
         this.jackPotVal += val;
 		myGameAnimate.JackPotAnimation_run();
+		if(this.jackPotVal == 0)
+			return;
 		setTimeout(() => {
 			for(let i=0;i<this.playerNumber;i++)
 			{
-				animate("#RateBox"+i,{width: (this.playerList[i].moneyPaid/this.jackPotVal*375)+"px"});
+				animate("#RateBox"+i,{width: Math.floor(this.playerList[i].moneyPaid/this.jackPotVal*375)+"px"});
 			}
 		}, 50);
     }
@@ -98,10 +100,12 @@ export class Game{
     {
         this.jackPotVal = val;
 		myGameAnimate.JackPotAnimation_run();
+		if(this.jackPotVal == 0)
+			return;
 		setTimeout(() => {
 			for(let i=0;i<this.playerNumber;i++)
 			{
-				animate("#RateBox"+i,{width: (this.playerList[i].moneyPaid/this.jackPotVal*375)+"px"});
+				animate("#RateBox"+i,{width: Math.floor(this.playerList[i].moneyPaid/this.jackPotVal*375)+"px"});
 			}
 		}, 50);
     }
@@ -113,7 +117,9 @@ export class Game{
 
     errorHandle(errorInfo)
     {
-      alert(errorInfo);
+		// var audio = new Audio('errorSound.mp3'); 
+		// audio.play(); 
+		alert(errorInfo);
     }
 
     addPlayerACtion()
