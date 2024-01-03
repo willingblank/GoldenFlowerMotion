@@ -247,7 +247,7 @@ export class Game{
     nextPlayer()
     {
 		// 玩家指针指向下一个玩家
-		//this.tempIndicatorFlag = 0;
+		this.tempIndicatorFlag = 0;		// 智能刷新数值指示器Flag
 		do
 		{
 			console.log("next player");
@@ -590,8 +590,11 @@ export class Game{
 		//find loser
 		//find max loser to give max winner
 		//then loop
-		console.log("结算开始");
+		console.log("请求结算");
 		if(this.gameState !== "starting")
+			return;
+		var confirmResult = window.confirm("请确认结算游戏\n--------------------------------\n结算游戏所有玩家的分数将清零\n只能通过刷新页面重新开始游戏");
+		if(confirmResult == false)
 			return;
 
 		this.set_jackPotVal(0);
