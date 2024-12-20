@@ -86,7 +86,7 @@ export class Game{
     {
         this.jackPotVal += val;
 		myGameAnimate.JackPotAnimation_run();
-		if(this.jackPotVal == 0)
+		if(this.jackPotVal === 0)
 			return;
 		setTimeout(() => {
 			for(let i=0;i<this.playerNumber;i++)
@@ -100,7 +100,7 @@ export class Game{
     {
         this.jackPotVal = val;
 		myGameAnimate.JackPotAnimation_run();
-		if(this.jackPotVal == 0)
+		if(this.jackPotVal === 0)
 			return;
 		setTimeout(() => {
 			for(let i=0;i<this.playerNumber;i++)
@@ -132,7 +132,7 @@ export class Game{
 
 		let namevalue = document.getElementById("name").value;
 		let temp_color = document.getElementById("playerAttributesCollecter").style.backgroundColor;
-		if(namevalue == "")
+		if(namevalue === "")
 		{
 			this.errorHandle("请输入昵称后添加玩家.");
 			return;
@@ -144,12 +144,12 @@ export class Game{
 		}
 		for(let i=0;i<this.playerNumber;i++)
 		{
-			if(namevalue == this.playerList[i].name)
+			if(namevalue === this.playerList[i].name)
 			{
 				this.errorHandle("请勿添加昵称相同的玩家.");
 				return;
 			}
-			if(temp_color == this.playerList[i].color)
+			if(temp_color === this.playerList[i].color)
 			{
 				this.errorHandle("请勿选择重复的颜色.")
 				return;
@@ -255,14 +255,14 @@ export class Game{
 				this.playerPointer++;
 			else
 				this.playerPointer=0;
-		}while(this.playerList[this.playerPointer].state == "idle")
+		}while(this.playerList[this.playerPointer].state === "idle")
 
 		if(this.checkmate())
 			this.littleWinner(this.playerPointer);
 		
 		if(this.actionTimes>=this.playerNumber)
 		{
-			if(this.playerList[this.playerPointer].state == "checked")
+			if(this.playerList[this.playerPointer].state === "checked")
 				this.set_numberIndicator(this.lastNumberIndicator);
 			else
 				this.set_numberIndicator(Math.ceil(this.lastNumberIndicator/2));
@@ -276,13 +276,13 @@ export class Game{
     
     numberPress(number)
     {
-      if(number == -1) 
+      if(number === -1) 
         this.set_numberIndicator(parseInt(this.get_numberIndicator()/10));
-      else if(number == -2)
+      else if(number === -2)
       this.set_numberIndicator(0);
       else
 	  {
-		if(this.tempIndicatorFlag == 0)
+		if(this.tempIndicatorFlag === 0)
 		{
 			this.set_numberIndicator(0);
 			this.tempIndicatorFlag = 1;
@@ -349,7 +349,7 @@ export class Game{
 		let idleNumber = 0;
 		for(let i=0;i<(this.playerNumber);i++)
 		{
-			if(this.playerList[i].state == "idle")
+			if(this.playerList[i].state === "idle")
 			{
 				idleNumber++;
 			}
@@ -364,7 +364,7 @@ export class Game{
 
     betAction()
     {
-		if(this.gameState == "preparing")
+		if(this.gameState === "preparing")
 			return;
         
         if(this.numberIndicator<this.lastNumberIndicator)
@@ -387,10 +387,10 @@ export class Game{
 
 	blindBetAction()
 	{
-		if(this.gameState == "preparing")
+		if(this.gameState === "preparing")
 			return;
 
-		if(this.playerList[this.playerPointer].state == "checked")
+		if(this.playerList[this.playerPointer].state === "checked")
 		{
 			this.errorHandle("你已经查看过卡面 不可以执行blindBet行动");
 			return;
@@ -419,7 +419,7 @@ export class Game{
 
 	fightAction()
 	{
-		if(this.gameState == "preparing")
+		if(this.gameState === "preparing")
 			return;
 		if(this.actionTimes<this.playerNumber)
 		{
@@ -438,8 +438,8 @@ export class Game{
 
 		for(let i=0;i<(this.playerNumber);i++)
 		{
-			if(i == this.playerPointer) continue;
-			if(this.playerList[i].state == "idle") continue;
+			if(i === this.playerPointer) continue;
+			if(this.playerList[i].state === "idle") continue;
 
 			setTimeout(() => {
 				this.game_loadFightComponent_p(this.playerList,i);
@@ -530,7 +530,7 @@ export class Game{
 
 	flodAction(who)
 	{
-		if(this.gameState == "preparing")
+		if(this.gameState === "preparing")
 			return;
 		this.gameState = "gaming";
 		this.gameBackup();
@@ -552,7 +552,7 @@ export class Game{
 		for(let i=0;i<this.playerNumber;i++)
 		{
 			this.playerScoreSet(i,this.playerList[i].score);
-			if(this.playerList[i].state != "idle")
+			if(this.playerList[i].state !== "idle")
 				animate("#ScoreinRankPlayer"+i,{backgroundColor:this.playerList[i].color});
 			else if(this.playerList[i].state === "idle")
 				animate("#ScoreinRankPlayer"+i,{backgroundColor:"rgb(0, 0, 0)"});
@@ -563,7 +563,7 @@ export class Game{
 	{
 		if(this.totalActionTimes < 1)
 			return;
-		if(this.gameState == "preparing")
+		if(this.gameState === "preparing")
 			return;
 		let tempThis = this;
 		tempThis = _.cloneDeep(lastGame);
@@ -579,7 +579,7 @@ export class Game{
 		createDiv.style.width = "1px";
 		createDiv.style.height = "15px";
 		createDiv.style.float = "left";
-		createDiv.style.borderRadius = "5%";
+		createDiv.style.borderRadius = "1vw";
 		createDiv.style.backgroundColor = this.playerList[id].color;
 		document.getElementById("rateBar").appendChild(createDiv);
 	}
@@ -593,8 +593,8 @@ export class Game{
 		console.log("请求结算");
 		if(this.gameState !== "starting")
 			return;
-		var confirmResult = window.confirm("请确认结算游戏\n--------------------------------\n结算游戏所有玩家的分数将清零\n只能通过刷新页面重新开始游戏");
-		if(confirmResult == false)
+		var confirmResult = window.confirm("是否确认结算游戏\n--------------------------------\n结算游戏所有玩家的分数将清零\n只能通过刷新页面重新开始游戏");
+		if(confirmResult === false)
 			return;
 
 		this.set_jackPotVal(0);
@@ -610,7 +610,7 @@ export class Game{
 			let zeroNumber = 0;
 			for(let i=0;i<this.playerNumber;i++)
 			{
-				if(this.playerList[i].score == 0)
+				if(this.playerList[i].score === 0)
 					zeroNumber++;
 
 				if(this.playerList[i].score<minPlayer.score)
@@ -622,7 +622,7 @@ export class Game{
 					maxPlayer = this.playerList[i];
 				}
 			}
-			if(zeroNumber == this.playerNumber)
+			if(zeroNumber === this.playerNumber)
 				break;
 
 			if(-minPlayer.score < maxPlayer.score)
