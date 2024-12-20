@@ -13,13 +13,12 @@ window.onload = function() {
 
 export function imgResize(mainFrameId, insideElementID)
 {
-    var purpleIndicatorOffset = 15
     var mainframe = document.getElementById(mainFrameId)
     mainframe.style.height = window.innerHeight + "px"
     mainframe.style.width = window.innerWidth + "px"
     var mainframe_width  = mainframe.offsetWidth
     var mainframe_height = mainframe.offsetHeight
-    mainframe_width = mainframe_width - purpleIndicatorOffset
+    mainframe_width = mainframe_width
     
     var insideElement = document.getElementById(insideElementID)
     var insideElement_width  = insideElement.offsetWidth
@@ -52,11 +51,11 @@ export function imgResize(mainFrameId, insideElementID)
 
     if(insideElement_width < mainframe_width)
     {
-        insideElement_leftOffset = (mainframe_width/2) - (insideElement_width/2) + purpleIndicatorOffset
+        insideElement_leftOffset = (mainframe_width/2) - (insideElement_width/2)
     }
     else
     {
-        insideElement_leftOffset = 0 + purpleIndicatorOffset
+        insideElement_leftOffset = 0
     }
     insideElement.style.scale = myScale
     insideElement.style.top   = insideElement_topOffset+"px"

@@ -13,6 +13,7 @@ html, body
 #backGround
 {
 	background-color: rgb(235, 235, 235);
+  opacity: 0.7;
 	width: 100vw;
 	height: 100vh;
 	overflow: hidden;
@@ -276,18 +277,19 @@ html, body
 #indicatorDiv
 {
   position: absolute;
-  top: 5px;
-  left: -15px;
+  top: -3px;
+  left: 15px;
 
   z-index: 10;
 }
 
 #indicator
 {
-  width: 15px;
-  height: 15px;
+  width: 35px;
+  height: 35px;
+  opacity: 0.5;
   background-color: blueviolet;
-
+  border-radius: 30%;
 }
 
 
@@ -496,7 +498,7 @@ html, body
 {
   width: 375px;
   height: 15px;
-  background-color: black;
+  background-color: rgb(255, 255, 255);
   position: relative;
   top: 400px;
 }

@@ -25,36 +25,36 @@ function App() {
 	const color_count = useMotionValue("#cccccc");      // 颜色-动画状态变量  √
 
 	game.game_JackPotAnimation_init(()=>{   			// 奖池动画实体函数
-	animate(jackpot_count, game.get_jackPotVal(), { duration: 0.5 });
+		animate(jackpot_count, game.get_jackPotVal(), { duration: 0.5 });
 	});
 
 	game.game_NumberIndicatorAnimation_init(()=>{   	// 数值指示器实体函数
-	animate(numberIndicator_count, game.get_numberIndicator(), { duration: 0.25 });
+		animate(numberIndicator_count, game.get_numberIndicator(), { duration: 0.25 });
 	});
 
 	function handleColorChange(hex)   					// 准备阶段颜色变化实体函数
 	{
-	animate(color_count, hex.hex, { duration: 0.25 });
+		animate(color_count, hex.hex, { duration: 0.25 });
 	}
 
 	game.game_addComponent_init((playerName,color)=>{   // 准备阶段添加玩家动画实体函数
-	setComponents([...components,<PlayerInfo name={playerName} color={color} key={components.length} />]);
+		setComponents([...components,<PlayerInfo name={playerName} color={color} key={components.length} />]);
 	});
 
 	game.game_loadComponent_init((playerList,i)=>{    	// 游戏开始加载玩家动画实体函数
-	setplayer_components(prev => [...prev,  <PlayerRankInfo player={playerList[i]} key={i} />]);
+		setplayer_components(prev => [...prev,  <PlayerRankInfo player={playerList[i]} key={i} />]);
 	});
 
 	game.game_loadFightComponent_init((playerList,i)=>{
-	setplayerFight_components(prev=>[...prev, <PlayerFightInfo player={playerList[i]} key={i} />]);
+		setplayerFight_components(prev=>[...prev, <PlayerFightInfo player={playerList[i]} key={i} />]);
 	});
 
 	game.game_clearFightCpmponet_init(()=>{
-	setplayerFight_components([]);
+		setplayerFight_components([]);
 	});
 
 	game.game_Indicator_yAnimation_init((playerPointer)=>{    // 紫色玩家指示器动画实体函数
-	setindicator_y(10+playerPointer*50);
+		setindicator_y(10+playerPointer*50);
 	});
   
   	//====================================================================

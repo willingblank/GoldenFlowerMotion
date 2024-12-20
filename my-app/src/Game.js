@@ -270,7 +270,10 @@ export class Game{
 
 		console.log("playerPointer = "+this.playerPointer);
 	
-		document.getElementById("victoryCel").style.backgroundColor = this.playerList[this.playerPointer].color;
+		//document.getElementById("victoryCel").style.backgroundColor = this.playerList[this.playerPointer].color;
+		animate("#victoryCel",{backgroundColor:this.playerList[this.playerPointer].color});
+		animate("#rateBar",{backgroundColor:this.playerList[this.playerPointer].color});
+
 		myGameAnimate.Indicator_yAnimation_run(this.playerPointer);
     }
     
@@ -593,7 +596,10 @@ export class Game{
 		console.log("请求结算");
 		if(this.gameState !== "starting")
 			return;
-		var confirmResult = window.confirm("是否确认结算游戏\n--------------------------------\n结算游戏所有玩家的分数将清零\n只能通过刷新页面重新开始游戏");
+		var confirmResult = window.confirm( "是否确认结算游戏\n"+
+											"--------------------------------\n"+
+											"结算游戏所有玩家的分数将清零\n"+
+											"只能通过刷新页面重新开始游戏");
 		if(confirmResult === false)
 			return;
 
