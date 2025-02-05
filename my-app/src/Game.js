@@ -552,6 +552,7 @@ export class Game{
 		// -----------animate--------------
 		myGameAnimate.Indicator_yAnimation_run(this.playerPointer);
 		this.set_jackPotVal(this.jackPotVal);
+		animate("#victoryCel",{backgroundColor:this.playerList[this.playerPointer].color});
 		for(let i=0;i<this.playerNumber;i++)
 		{
 			this.playerScoreSet(i,this.playerList[i].score);
@@ -594,6 +595,7 @@ export class Game{
 		//find max loser to give max winner
 		//then loop
 		console.log("请求结算");
+		let ResStr = "";
 		if(this.gameState !== "starting")
 			return;
 		var confirmResult = window.confirm( "是否确认结算游戏\n"+
@@ -634,18 +636,24 @@ export class Game{
 			if(-minPlayer.score < maxPlayer.score)
 			{
 				console.log("("+minPlayer.name+") -> ("+maxPlayer.name+") = "+-minPlayer.score);
+				ResStr += "("+minPlayer.name+") -> ("+maxPlayer.name+") = "+ -minPlayer.score + "\r\n"
 				maxPlayer.score += minPlayer.score;
 				minPlayer.score = 0;
 			}
 			else
 			{
 				console.log("("+minPlayer.name+") -> ("+maxPlayer.name+") = "+maxPlayer.score);
+				ResStr += "("+minPlayer.name+") -> ("+maxPlayer.name+") = "+maxPlayer.score + "\r\n"
 				minPlayer.score += maxPlayer.score;
 				maxPlayer.score = 0;
 			}
 
 		}
 		console.log("结算结束");
+		ResStr += "结算结束"
+		setTimeout(() => {
+			alert(ResStr)
+		}, 700);
 		this.gameState = "ending";
 	}
 }

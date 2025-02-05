@@ -88,7 +88,7 @@ function App() {
 						/>
 					</div>
 				</motion.div>	{/* playerAttributesCollecter */}
-				<div id="version" onClick={()=>{ imgResize("backGround", "totalFrame") }}>Version: 2024.12.19</div>
+				<div id="version" onClick={()=>{ imgResize("backGround", "totalFrame") }}>Version: 2025.02.05</div>
 			</motion.div>	{/* readyFrame */}
 
 			<div id="gameFrame">
